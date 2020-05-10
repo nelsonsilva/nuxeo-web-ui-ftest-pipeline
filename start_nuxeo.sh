@@ -4,7 +4,7 @@ echo "Creating instance-clid..."
 kubectl create secret generic instance-clid --from-literal=instance.clid="${NUXEO_CLID}"
 
 echo "Installing Nuxeo Helm chart..."
-cat <<EOF | helm install --repo https://chartmuseum.platform.dev.nuxeo.com my-nuxeo nuxeo --atomic --timeout 15m -f - 
+cat <<EOF | helm install --repo https://chartmuseum.platform.dev.nuxeo.com my-nuxeo nuxeo --atomic --timeout 30m -f - 
 nuxeo:
   enabled: true
   image:
@@ -22,8 +22,8 @@ nuxeo:
   ingress:
     enabled: true
     annotations: null # do not force nginx class
-  elasticsearch:
-    deploy: true
-  mongodb:
-    deploy: true
 EOF
+
+kubectl get ingress my-nuxeo-nuxeo -n default
+
+kubectl logs $(kubectl get pods --selector=app=my-nuxeo-nuxeo -n default --output=jsonpath="{.items..metadata.name}") -n default

@@ -1,4 +1,4 @@
-name: k3s-tekton
+name: ftest
 
 on: [push]
 
@@ -15,6 +15,6 @@ jobs:
         env:
           NUXEO_CLID: ${{ secrets.clid }}
         run: ./start_nuxeo.sh
-      - name: Run Function Tests
+      - name: Functional Tests
         run: ./run_ftest.sh
 
