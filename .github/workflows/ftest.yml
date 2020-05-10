@@ -7,6 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10'
       - name: Setup k3s
         run: |
           curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
