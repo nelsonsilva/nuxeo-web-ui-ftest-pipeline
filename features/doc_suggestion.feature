@@ -1,3 +1,4 @@
+@ignore
 Feature: Document Suggestion
 
   I can edit single and multiple Document Suggestion Widgets

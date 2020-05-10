@@ -1,3 +1,4 @@
+@ignore
 Feature: Multi-valued Properties Editing
 
   I can create and edit multi-valued properties
