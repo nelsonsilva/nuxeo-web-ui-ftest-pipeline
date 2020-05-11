@@ -10,10 +10,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '10'
-      - name: Setup k3s
-        run: |
-          curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
-          mkdir ~/.kube && cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+      - uses: nelsonsilva/setup-k3s@v0.1.0
       - name: Start Nuxeo
         env:
           NUXEO_CLID: ${{ secrets.clid }}
