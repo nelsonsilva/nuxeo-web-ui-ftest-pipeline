@@ -1,5 +1,7 @@
 #!/bin/sh
 
+docker build -t nuxeo-web-ui-ftest-server .
+
 echo "Creating instance-clid..."
 kubectl create secret generic instance-clid --from-literal=instance.clid="${NUXEO_CLID}"
 
@@ -8,7 +10,7 @@ cat <<EOF | helm install --repo https://chartmuseum.platform.dev.nuxeo.com my-nu
 nuxeo:
   enabled: true
   image:
-    tag: 11.x
+    repository: nuxeo-web-ui-ftest-server
     pullPolicy: IfNotPresent
   packages: nuxeo-web-ui
   customParams: |-

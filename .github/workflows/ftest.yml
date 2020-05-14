@@ -7,14 +7,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - name: Set up Java
+        uses: actions/setup-java@v1
         with:
-          node-version: '10'
+          java-version: 11
+      - name: Build itests package
+        working-directory: itests
+        run: mvn package
       - uses: nelsonsilva/setup-k3s@v0.1.0
       - name: Start Nuxeo
         env:
           NUXEO_CLID: ${{ secrets.clid }}
         run: ./start_nuxeo.sh
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10'
       - name: Functional Tests
         run: ./run_ftest.sh
 
